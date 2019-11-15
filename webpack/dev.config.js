@@ -25,7 +25,7 @@ const baseDevConfig = () => ({
     path: '/js/__webpack_hmr'
   },
   output: {
-    path: path.join(__dirname, '../dev/js'),
+    path: path.join(__dirname, '../bin/js'),
     filename: '[name].bundle.js',
     chunkFilename: '[id].chunk.js'
   },
@@ -77,7 +77,7 @@ delete injectPageConfig.hotMiddleware;
 delete injectPageConfig.module.rules[0].options;
 injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
 injectPageConfig.output = {
-  path: path.join(__dirname, '../dev/js'),
+  path: path.join(__dirname, '../bin/js'),
   filename: 'inject.bundle.js',
 };
 const appConfig = baseDevConfig();
