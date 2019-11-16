@@ -20,7 +20,14 @@ export const PasswordChallenge = (props: IProps) => {
   const url = "https://s3.eu-central-1.amazonaws.com/static.goin/junction/TitlePassword.svg";
 
   const onFinish = () => {
-    // Do logic here if needed like sending event
+    chrome.storage.sync.set({
+      widgetData: {
+        state: "NEW_PASSWORD",
+        metadata: {
+          pwdHint: output.story
+        }
+      }
+    });
     props.onFinish(output);
   }
 
