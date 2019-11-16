@@ -26,7 +26,7 @@ export class Core {
         let newDomain = newhref.split('//')[1].split('/')[0];
         let oldDomanin = this.lastHref.split('//')[1].split('/')[0];
 
-        if(newDomain === oldDomanin){
+        if (newDomain === oldDomanin) {
             this.history = [];
         }
     }
@@ -41,10 +41,10 @@ export class Core {
     private startHrefInterceptors() {
         setInterval(() => {
             const newhref = window.location.href;
-            this.cleanHistory(newhref);
             if (newhref !== this.lastHref) {
                 this.intercept(InterceptorMethods.INTERCEPTOR_HREF, newhref);
                 this.lastHref = window.location.href;
+                this.cleanHistory(newhref);
             }
         }, 100);
     }
