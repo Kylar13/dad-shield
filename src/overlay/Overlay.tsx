@@ -2,7 +2,7 @@ import * as React from "react";
 import { Modal } from "./components/Modal";
 import { Core } from "../core/core";
 
-export const Overlay = (props) => {
+export const Overlay = () => {
 
   let core;
 
