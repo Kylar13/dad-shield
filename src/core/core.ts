@@ -22,6 +22,15 @@ export class Core {
         this.fn = fn;
     }
 
+    public cleanHistory(newhref) {
+        let newDomain = newhref.split('//')[1].split('/')[0];
+        let oldDomanin = this.lastHref.split('//')[1].split('/')[0];
+
+        if(newDomain === oldDomanin){
+            this.history = [];
+        }
+    }
+
     private pushAction(interceptorId: string, action: IInterceptorAction) {
         if (!this.history.includes(interceptorId)) {
             this.fn(action);
@@ -32,6 +41,7 @@ export class Core {
     private startHrefInterceptors() {
         setInterval(() => {
             const newhref = window.location.href;
+            this.cleanHistory(newhref);
             if (newhref !== this.lastHref) {
                 this.intercept(InterceptorMethods.INTERCEPTOR_HREF, newhref);
                 this.lastHref = window.location.href;
@@ -63,7 +73,7 @@ export class Core {
     private intercept(method: InterceptorMethods, extra: any) {
         switch (method) {
             case InterceptorMethods.INTERCEPTOR_HREF:
-                const hrefInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_HREF);
+                const hrefInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_HREF && x.active);
                 for (const interceptor of hrefInterceptors) {
                     if (interceptor.condition.fn(extra)) {
                         this.pushAction(interceptor.id, interceptor.action);
@@ -71,7 +81,7 @@ export class Core {
                 }
                 break;
             case InterceptorMethods.INTERCEPTOR_XPATH:
-                const xpathInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_XPATH);
+                const xpathInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_XPATH && x.active);
                 for (const interceptor of xpathInterceptors) {
                     if (interceptor.condition.fn(extra)) {
                         this.pushAction(interceptor.id, interceptor.action);
