@@ -16,12 +16,6 @@
       "index.css"
     ]
   },
-  // "background": {
-  //   "scripts": [
-  //     "js/extension/background.js"
-  //   ],
-  //   "persistent": true
-  // },
   "permissions": [
     "https://*/*",
     "http://*/*"
