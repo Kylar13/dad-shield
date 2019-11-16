@@ -1,9 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { Overlay } from "../overlay/Overlay";
-import { Core } from "../core/core";
-
-let visible: boolean = false;
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
@@ -14,16 +11,11 @@ chrome.runtime.sendMessage({}, (response) => {
     })
 })
 
-const core = new Core();
-core.registerListener((info: any) => {
-    console.log(info);
-    visible = true;
-});
-core.start();
+
 
 const element = document.createElement('div');
 element.id = "extroot";
 
 document.body.appendChild(element);
 
-ReactDOM.render(<Overlay visible={visible} setVisibility={() => visible=false}/>, document.getElementById("extroot"));
+ReactDOM.render(<Overlay/>, document.getElementById("extroot"));
