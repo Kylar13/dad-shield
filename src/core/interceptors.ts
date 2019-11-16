@@ -30,6 +30,7 @@ export const interceptors: IInterceptor[] = [
         }
     },
     {
+        id: "facebook chat",
         condition: {
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (document) => {
