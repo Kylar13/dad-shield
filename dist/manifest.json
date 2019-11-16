@@ -1,19 +1,18 @@
 {
-  "name": "TS/R/WP Chrome Extension",
+  "name": "NetMate",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Boilerplate for a Chrome extension with TypeScript, React, and Webpack.",
-  "homepage_url": "https://duo.com/labs",
+  "description": "NetMate Junction 2019 Project",
+  "homepage_url": "https://netmate.com",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
   "browser_action": {
-    "default_title": "TSRWPCX",
-    "default_popup": "popup.html"
+    "default_title": "NetMate",
+    "default_popup": "widget.html"
   },
-  "default_locale": "en",
   "background": {
     "scripts": [
       "js/background.js"
