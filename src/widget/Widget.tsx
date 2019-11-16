@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import { WelcomeCarousel } from "./components/WelcomeCarousel";
 import { PasswordHint } from "./components/PasswordHint";
+import { Menu } from "./components/Menu";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
 enum WidgetStates {
@@ -72,11 +73,19 @@ const Widget = () => {
         <PasswordHint
           style={{ display: "flex", flex: 1 }}
           onEndPress={() => {
-            window.close();
+            chrome.storage.sync.set(
+              {
+                widgetData: {
+                  state: WidgetStates.MENU,
+                },
+              },
+              window.close,
+            );
           }}
           passwordHint={metadata.pwdHint}
         />
       ) : null}
+      {state === WidgetStates.MENU ? <Menu style={{ display: "flex", flex: 1 }} /> : null}
     </div>
   );
 };

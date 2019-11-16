@@ -27,19 +27,15 @@ export const PasswordHint = (props: Props) => {
       <p style={{ marginBottom: 32, fontFamily: "Rubik", fontSize: 16, color: "white" }}>
         Remember to show it to no one, and change them often!
       </p>
-      <button
+      <div
         style={{
           height: 182,
           marginBottom: isPressed ? 20 : 16,
           backgroundColor: passwordVisible ? "#D44A85" : "#990F4B",
           borderRadius: 9,
-          border: "none",
-          outline: "none",
           display: "flex",
           justifyContent: "center",
-        }}
-        onClick={() => {
-          setPasswordVisible(!passwordVisible);
+          alignItems: "center",
         }}
       >
         {passwordVisible ? (
@@ -47,7 +43,7 @@ export const PasswordHint = (props: Props) => {
         ) : (
           <img src={Lock} />
         )}
-      </button>
+      </div>
       <button
         style={{
           display: "flex",
@@ -63,15 +59,16 @@ export const PasswordHint = (props: Props) => {
           border: "none",
           outline: "none",
         }}
-        onClick={() => {
+        onMouseDown={() => {
           setIsPressed(true);
-          setTimeout(() => {
-            setIsPressed(false);
-            props.onEndPress();
-          }, 150);
+          setPasswordVisible(true);
+        }}
+        onMouseUp={() => {
+          setIsPressed(false);
+          setPasswordVisible(false);
         }}
       >
-        Next
+        Show me a hint!
       </button>
     </div>
   );
