@@ -11,7 +11,7 @@ export const interceptors: IInterceptor[] = [
             },
         },
         action: {
-            question: "assa",
+            question: "INTERCEPTOR_HREF",
             answer: "asdasd",
         }
     },
@@ -25,8 +25,21 @@ export const interceptors: IInterceptor[] = [
             },
         },
         action: {
-            question: "asdasd",
-            answer: "asdas",
+            question: "INTERCEPTOR_XPATH",
+            answer: "password",
+        }
+    },
+    {
+        condition: {
+            method: InterceptorMethods.INTERCEPTOR_XPATH,
+            fn: (document) => {
+                const search = document.evaluate("//div[contains(@class, 'fbNubFlyout fbDockChatTabFlyout uiContextualLayerParent')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                return Boolean(search);
+            },
+        },
+        action: {
+            question: "INTERCEPTOR_XPATH",
+            answer: "facebook chat",
         }
     }
 ];
