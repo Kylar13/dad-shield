@@ -11,7 +11,8 @@
   },
   "browser_action": {
     "default_title": "NetMate",
-    "default_popup": "widget.html"
+    "default_popup": "widget.html",
+    "css": ["index.css"]
   },
   "background": {
     "scripts": [
@@ -23,7 +24,7 @@
     "https://*/*",
     "http://*/*"
   ],
-  "content_security_policy": "default-src 'self';",
+  "content_security_policy": "default-src 'self'; style-src 'unsafe-inline';",
   "content_scripts": [
     {
       "matches": [
