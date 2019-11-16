@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Modal } from "./components/Modal";
 import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
+import { PasswordChallenge } from "./containers/PasswordChallenge/index";
 
 export const Overlay = () => {
 
@@ -19,8 +19,6 @@ export const Overlay = () => {
   }, []);
 
   return (
-    <Modal width={500} height={200} visible={visible} setVisibility={setVisibility}>
-      Modal Content!
-    </Modal>
+    <PasswordChallenge/>
   )
 };
