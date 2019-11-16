@@ -1,7 +1,6 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 
-export const Test = () => (
+export const Overlay = () => (
   <div
     style={{
       position: "fixed",
@@ -19,5 +18,3 @@ export const Test = () => (
     <p>Hola Carlos</p>
   </div>
 );
-
-ReactDOM.render(<Test />, document.getElementById("extroot"));
