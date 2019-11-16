@@ -14,12 +14,12 @@
     "default_popup": "widget.html",
     "css": ["index.css"]
   },
-  "background": {
-    "scripts": [
-      "js/extension/background.js"
-    ],
-    "persistent": true
-  },
+  // "background": {
+  //   "scripts": [
+  //     "js/extension/background.js"
+  //   ],
+  //   "persistent": true
+  // },
   "permissions": [
     "https://*/*",
     "http://*/*"
