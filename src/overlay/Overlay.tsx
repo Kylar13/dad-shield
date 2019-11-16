@@ -1,26 +1,32 @@
 import * as React from "react";
-import { Modal } from "./components/Modal";
 import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
+import { PasswordChallenge } from "./containers/PasswordChallenge/index";
 
 export const Overlay = () => {
 
   let core;
 
-  const [visible, setVisibility] = React.useState(false);
+  const [challenge, setChallenge] = React.useState<IInterceptorAction | null>(null);
 
   React.useEffect(() => {
     core = new Core();
     core.registerListener((info: IInterceptorAction) => {
       console.log(info);
-      setVisibility(true);
+      setChallenge(info);
     });
     core.start();
   }, []);
 
-  return (
-    <Modal width={500} height={200} visible={visible} setVisibility={setVisibility}>
-      Modal Content!
-    </Modal>
-  )
+  const onFinish = () => {
+    setChallenge(null);
+  }
+
+  if (!!challenge) {
+    return (
+      <PasswordChallenge onFinish={onFinish}/>
+    )
+  } else {
+    return null;
+  }
 };
