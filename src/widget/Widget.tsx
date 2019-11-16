@@ -2,8 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Header } from "./components/Header";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
+import { Carousel } from "./components/Carousel";
 
 const styles: { [key: string]: React.CSSProperties } = {
   content: {
@@ -16,24 +15,29 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
+const test = [
+  "1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+  "2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+  "3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+];
+
 class Widget extends React.Component {
   render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
     return (
       <div style={styles.content}>
         <Header style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }} />
-        <div style={{ display: "flex", flex: 1, backgroundColor: "blue", flexDirection: "row" }}>
-          <Carousel showThumbs={false}>
-            <div>
-              <p className="legend">Legend Carlos</p>
-            </div>
-            <div>
-              <p className="legend">Legend 2</p>
-            </div>
-            <div>
-              <p className="legend">Legend 3</p>
-            </div>
-          </Carousel>
-        </div>
+        <Carousel
+          style={{ display: "flex", flex: 1 }}
+          items={test}
+          onEndPress={() => window.alert("Done with carousel")}
+        />
       </div>
     );
   }
