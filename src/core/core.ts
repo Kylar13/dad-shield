@@ -34,6 +34,14 @@ export class Core {
     private pushAction(interceptorId: string, action: IInterceptorAction) {
         if (!this.history.includes(interceptorId)) {
             this.fn(action);
+            chrome.storage.sync.set({
+                widgetData: {
+                    state: "NEW_PASSWORD",
+                    metadata: {
+                        pwdhint: "lo que em doni la gana"
+                    }
+                }
+            });
             this.history.push(interceptorId);
         }
     }
