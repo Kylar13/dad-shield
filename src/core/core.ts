@@ -78,6 +78,14 @@ export class Core {
         window.addEventListener("load", () => {
             this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, document);
         })
+
+        const query = document.evaluate("//input", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+        for (let i = 0, length = query.snapshotLength; i < length; ++i) {
+            query.snapshotItem(i).addEventListener("focus", () => {
+                this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, document);
+            });
+        }
+
     }
 
     private intercept(method: InterceptorMethods, extra: any) {
