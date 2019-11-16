@@ -38,7 +38,7 @@ export class Core {
                 widgetData: {
                     state: "NEW_PASSWORD",
                     metadata: {
-                        pwdhint: "lo que em doni la gana"
+                        pwdHint: "lo que em doni la gana"
                     }
                 }
             });
