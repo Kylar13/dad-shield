@@ -12,7 +12,9 @@
   "browser_action": {
     "default_title": "NetMate",
     "default_popup": "widget.html",
-    "css": ["index.css"]
+    "css": [
+      "index.css"
+    ]
   },
   // "background": {
   //   "scripts": [
@@ -24,7 +26,7 @@
     "https://*/*",
     "http://*/*"
   ],
-  "content_security_policy": "default-src 'self'; style-src 'unsafe-inline';",
+  "content_security_policy": "default-src 'self'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;",
   "content_scripts": [
     {
       "matches": [

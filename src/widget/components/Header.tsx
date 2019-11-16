@@ -1,14 +1,14 @@
 import * as React from "react";
-import { WelcomeBanner } from "../../assets/index";
 
 interface Props {
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
+  img: string;
 }
 
 export const Header = (props: Props) => {
   return (
     <div style={{ ...props.style, justifyContent: "center" }}>
-      <img src={WelcomeBanner} alt="Welcome banner" />
+      <img src={props.img} alt="Welcome banner" />
     </div>
   );
 };
