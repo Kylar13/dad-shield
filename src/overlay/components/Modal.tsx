@@ -40,10 +40,10 @@ interface IModalProps {
 }
 
 export const Modal = (props: IModalProps) => {
-  
+
   return (
-    <div style={{...styles.overlay, display: props.visible ? "flex": "none"}}>
-      <div style={{...styles.container, width: props.width, height: props.height}}>
+    <div style={{ ...styles.overlay, display: props.visible ? "flex" : "none" }} id={"modal-container"}>
+      <div style={{ ...styles.container, width: props.width, height: props.height }}>
         {props.children}
         <div style={styles.closeButton} onClick={() => props.setVisibility(false)}>X</div>
       </div>
