@@ -18,7 +18,8 @@ export const interceptors: IInterceptor[] = [
         condition: {
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (document) => {
-                return true;
+                const search = document.evaluate("//input[@type=\"password\"]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                return Boolean(search);
             },
         },
         action: {

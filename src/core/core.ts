@@ -29,11 +29,13 @@ export class Core {
         const { MutationObserver } = window;
 
         const observer = new MutationObserver((mutations, observer) => {
-            this.intercept(InterceptorMethods.INTERCEPTOR_XPATH);
+            if ((mutations[0].target as any).id !== "modal-container") {
+                this.intercept(InterceptorMethods.INTERCEPTOR_XPATH);
+            }
         });
         observer.observe(document, {
             subtree: true,
-            attributes: true
+            attributes: true,
         });
     }
 
