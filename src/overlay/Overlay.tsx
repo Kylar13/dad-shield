@@ -1,18 +1,19 @@
 import * as React from "react";
 import { Modal } from "./components/Modal";
 import { Core } from "../core/core";
+import { IInterceptorAction } from "../core/models";
 
 export const Overlay = () => {
 
   let core;
 
   const [visible, setVisibility] = React.useState(false);
-  
-  React.useEffect(() =>{
+
+  React.useEffect(() => {
     core = new Core();
-    core.registerListener((info: any) => {
-        console.log(info);
-        setVisibility(true);
+    core.registerListener((info: IInterceptorAction) => {
+      console.log(info);
+      setVisibility(true);
     });
     core.start();
   }, []);
