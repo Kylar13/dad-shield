@@ -29,17 +29,23 @@ export class Core {
         const { MutationObserver } = window;
 
         const observer = new MutationObserver((mutations, observer) => {
-            if ((mutations[0].target as any).id !== "modal-container") {
-                this.intercept(InterceptorMethods.INTERCEPTOR_XPATH);
+            for (const mutation of mutations) {
+                if ((mutation.target as any).id !== "modal-container") {
+                    this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, mutation.target);
+                }
             }
         });
         observer.observe(document, {
             subtree: true,
             attributes: true,
         });
+
+        window.addEventListener("load", () => {
+            this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, document);
+        })
     }
 
-    private intercept(method: InterceptorMethods) {
+    private intercept(method: InterceptorMethods, extra?: any) {
         switch (method) {
             case InterceptorMethods.INTERCEPTOR_HREF:
                 const newhref = window.location.href;
@@ -56,7 +62,7 @@ export class Core {
             case InterceptorMethods.INTERCEPTOR_XPATH:
                 const xpathInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_XPATH);
                 for (const interceptor of xpathInterceptors) {
-                    if (interceptor.condition.fn(document)) {
+                    if (interceptor.condition.fn(extra || document)) {
                         this.fn(interceptor.action);
                     }
                 }
