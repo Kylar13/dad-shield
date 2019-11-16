@@ -52,7 +52,12 @@ export class Core {
                 this.lastHref = window.location.href;
                 break;
             case InterceptorMethods.INTERCEPTOR_XPATH:
-                console.log("the dom changed");
+                const xpathInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_XPATH);
+                for (const interceptor of xpathInterceptors) {
+                    if (interceptor.condition.fn(document)) {
+                        this.fn(interceptor.action);
+                    }
+                }
                 break;
             default:
                 break;

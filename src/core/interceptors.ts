@@ -11,7 +11,19 @@ export const interceptors: IInterceptor[] = [
         },
         action: {
             question: "assa",
-            answer: "asdasd"
+            answer: "asdasd",
+        }
+    },
+    {
+        condition: {
+            method: InterceptorMethods.INTERCEPTOR_XPATH,
+            fn: (document) => {
+                return true;
+            },
+        },
+        action: {
+            question: "asdasd",
+            answer: "asdas",
         }
     }
 ];
