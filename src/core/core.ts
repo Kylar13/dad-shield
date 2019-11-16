@@ -22,18 +22,20 @@ export class Core {
         this.fn = fn;
     }
 
-    private cleanHistory() {
-        this.history = [];
-    }
-
     private pushAction(interceptorId: string, action: IInterceptorAction) {
-        this.history.push(interceptorId);
-        this.fn(action);
+        if (!this.history.includes(interceptorId)) {
+            this.fn(action);
+            this.history.push(interceptorId);
+        }
     }
 
     private startHrefInterceptors() {
         setInterval(() => {
-            this.intercept(InterceptorMethods.INTERCEPTOR_HREF);
+            const newhref = window.location.href;
+            if (newhref !== this.lastHref) {
+                this.intercept(InterceptorMethods.INTERCEPTOR_HREF, newhref);
+                this.lastHref = window.location.href;
+            }
         }, 100);
     }
 
@@ -43,7 +45,7 @@ export class Core {
         const observer = new MutationObserver((mutations, observer) => {
             for (const mutation of mutations) {
                 if ((mutation.target as any).id !== "modal-container") {
-                    this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, mutation.target);
+                    this.intercept(InterceptorMethods.INTERCEPTOR_XPATH, document);
                 }
             }
         });
@@ -58,25 +60,21 @@ export class Core {
         })
     }
 
-    private intercept(method: InterceptorMethods, extra?: any) {
+    private intercept(method: InterceptorMethods, extra: any) {
         switch (method) {
             case InterceptorMethods.INTERCEPTOR_HREF:
-                const newhref = window.location.href;
-                if (newhref !== this.lastHref) {
-                    const hrefInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_HREF);
-                    for (const interceptor of hrefInterceptors) {
-                        if (interceptor.condition.fn(newhref)) {
-                            this.fn(interceptor.action);
-                        }
+                const hrefInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_HREF);
+                for (const interceptor of hrefInterceptors) {
+                    if (interceptor.condition.fn(extra)) {
+                        this.pushAction(interceptor.id, interceptor.action);
                     }
                 }
-                this.lastHref = window.location.href;
                 break;
             case InterceptorMethods.INTERCEPTOR_XPATH:
                 const xpathInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === InterceptorMethods.INTERCEPTOR_XPATH);
                 for (const interceptor of xpathInterceptors) {
-                    if (interceptor.condition.fn(extra || document)) {
-                        this.fn(interceptor.action);
+                    if (interceptor.condition.fn(extra)) {
+                        this.pushAction(interceptor.id, interceptor.action);
                     }
                 }
                 break;
