@@ -1,7 +1,3 @@
-import * as React from "react"
-import * as ReactDOM from "react-dom"
-import { Test } from "../overlay/overlay";
-
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
         if (document.readyState === "complete") {
@@ -15,5 +11,3 @@ const element = document.createElement('div');
 element.id = "extroot";
 
 document.body.appendChild(element);
-
-ReactDOM.render(<Test />, element);
