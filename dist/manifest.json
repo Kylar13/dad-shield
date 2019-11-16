@@ -18,7 +18,8 @@
   },
   "permissions": [
     "https://*/*",
-    "http://*/*"
+    "http://*/*",
+    "storage"
   ],
   "content_security_policy": "default-src 'self'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;",
   "content_scripts": [

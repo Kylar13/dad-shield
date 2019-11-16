@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Header } from "./components/Header";
 import { Carousel } from "./components/Carousel";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
@@ -35,25 +34,42 @@ const test = [
   },
 ];
 
-class Widget extends React.Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-    return (
-      <div style={styles.content}>
+const Widget = () => {
+  const [state, setState] = React.useState("WELCOME");
+  const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
+
+  React.useEffect(() => {
+    try {
+      console.log("Use effect hook");
+      chrome.storage.sync.get(["widgetData"], function(result) {
+        console.log("Value currently is " + result.widgetData);
+        const { state = "WELCOME", metadata = {} } = result.widgetData;
+        setState(state);
+        setState(metadata);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  return (
+    <div style={styles.content}>
+      {state === "WELCOME" ? (
         <Carousel
           style={{ display: "flex", flex: 1 }}
           items={test}
-          onEndPress={() => window.alert("Done with carousel")}
+          onEndPress={() => {
+            window.close();
+          }}
         />
-      </div>
-    );
-  }
-}
+      ) : null}
+      {state === "PASSWORD" ? (
+        <div style={{ display: "flex", flex: 1 }}>
+          <p>{metadata.pwdHint}</p>
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 ReactDOM.render(<Widget />, document.getElementById("root"));
