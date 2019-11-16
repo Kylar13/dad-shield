@@ -8,7 +8,7 @@ const StyledButton = styled.div`
   height: 64px;
   font-family: Rubik;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 20px;
   background-color: ${COLORS.blue};
   box-shadow: 0px 4px 0px #140374;
   border-radius: 10px;

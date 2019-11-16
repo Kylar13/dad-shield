@@ -9,6 +9,7 @@ import { HeaderImage } from "./HeaderImage";
 interface IProps {
   headerImageUrl: string;
   children: JSX.Element[];
+  onFinish: () => void;
 }
 
 const ChallengeContent = styled.div`
@@ -26,6 +27,14 @@ export const ChallengeContainer = (props: IProps) => {
 
   const Stage = props.children[stage];
 
+  const onClick = () => {
+    if (stage === props.children.length -1) {
+      props.onFinish();
+    } else {
+      setStage(stage + 1);
+    }
+  };
+
   return (
     <FullScreenModal>
       <div style={{display: "block"}}>
@@ -36,7 +45,7 @@ export const ChallengeContainer = (props: IProps) => {
           {Stage}
         </ChallengeContent>
         <div style={{maxWidth: 600, margin: "auto"}}>
-          <Button onClick={() => setStage((stage + 1) % props.children.length)}>
+          <Button onClick={onClick}>
             {Stage.props.buttonText}
           </Button>
         </div>

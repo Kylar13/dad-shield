@@ -2,13 +2,20 @@ import * as React from "react";
 
 import { PasswordExample } from "../../components/PasswordExample";
 import { Input } from "../../components/Input";
+import { IPasswordOutput } from "./index";
 
 interface IProps {
   buttonText: string;
+  output: IPasswordOutput;
+  setOutput: (output: IPasswordOutput) => void;
 }
 
 
 export const PasswordModalForm = (props: IProps) => {
+
+  const onChange = (event: any) => {
+    props.setOutput({...props.output, story: event.target.value})
+  }
 
   return (
     <div>
@@ -24,7 +31,7 @@ export const PasswordModalForm = (props: IProps) => {
         </PasswordExample>
       </div>
       <div style={{display: "flex", flex: 1, padding: 19, flexDirection: "column"}}>
-        <Input />
+        <Input placeholder="Type your own funny story here." value={props.output.story} onChange={onChange} />
       </div>
     </div>
   )

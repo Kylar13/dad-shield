@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import COLORS from "../../utils/colors";
 
-const InputContainer = styled.input`
+export const Input = styled.input`
   display: flex;
   height: 58px;
   background-color: white;
@@ -26,13 +26,3 @@ const InputContainer = styled.input`
     color: #D8D8D8;
   }
 `;
-
-interface IModalProps {
-}
-
-export const Input = (props: IModalProps) => {
-  
-  return (
-    <InputContainer placeholder={"Type your own funny story here."} />
-  );
-};

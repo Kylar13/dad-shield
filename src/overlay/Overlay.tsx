@@ -7,18 +7,26 @@ export const Overlay = () => {
 
   let core;
 
-  const [visible, setVisibility] = React.useState(false);
+  const [challenge, setChallenge] = React.useState<IInterceptorAction | null>(null);
 
   React.useEffect(() => {
     core = new Core();
     core.registerListener((info: IInterceptorAction) => {
       console.log(info);
-      setVisibility(true);
+      setChallenge(info);
     });
     core.start();
   }, []);
 
-  return (
-    <PasswordChallenge/>
-  )
+  const onFinish = () => {
+    setChallenge(null);
+  }
+
+  if (!!challenge) {
+    return (
+      <PasswordChallenge onFinish={onFinish}/>
+    )
+  } else {
+    return null;
+  }
 };
