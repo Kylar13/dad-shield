@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import { Test } from "../overlay/test";
+import { Test } from "../overlay/overlay";
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {

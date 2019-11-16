@@ -7,8 +7,7 @@ module.exports = {
     entry: {
         content: './src/extension/content.tsx',
         background: './src/extension/background.ts',
-        popup: './src/widget/components/popup/popup.tsx',
-        test: './src/overlay/test.tsx',
+        widget: './src/widget/Widget.tsx'
     },
 
     output: {
@@ -23,6 +22,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.ts?$/, loader: "ts-loader" },
             { test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
     },
