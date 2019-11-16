@@ -4,6 +4,7 @@ import { InterceptorMethods } from "./enums";
 export const interceptors: IInterceptor[] = [
     {
         id: "registerurl",
+        active: true,
         condition: {
             method: InterceptorMethods.INTERCEPTOR_HREF,
             fn: (href) => {
@@ -17,6 +18,7 @@ export const interceptors: IInterceptor[] = [
     },
     {
         id: "passwordfield",
+        active: true,
         condition: {
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (target) => {
@@ -31,6 +33,7 @@ export const interceptors: IInterceptor[] = [
     },
     {
         id: "facebook chat",
+        active: true,
         condition: {
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (document) => {

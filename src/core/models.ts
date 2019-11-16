@@ -14,6 +14,7 @@ export interface IInterceptorAction {
 
 export interface IInterceptor {
     id: string;
+    active: boolean,
     condition: IInterceptorCondition;
     action: IInterceptorAction;
 }
