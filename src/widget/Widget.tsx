@@ -43,9 +43,11 @@ const Widget = () => {
       console.log("Use effect hook");
       chrome.storage.sync.get(["widgetData"], function(result) {
         console.log("Value currently is " + result.widgetData);
-        const { state = "WELCOME", metadata = {} } = result.widgetData;
-        setState(state);
-        setState(metadata);
+        if (result.widgetData) {
+          const { state = "WELCOME", metadata = {} } = result.widgetData;
+          setState(state);
+          setState(metadata);
+        }
       });
     } catch (err) {
       console.log(err);
@@ -63,7 +65,7 @@ const Widget = () => {
           }}
         />
       ) : null}
-      {state === "PASSWORD" ? (
+      {state === "NEW_PASSWORD" ? (
         <div style={{ display: "flex", flex: 1 }}>
           <p>{metadata.pwdHint}</p>
         </div>
