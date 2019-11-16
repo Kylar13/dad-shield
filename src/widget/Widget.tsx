@@ -21,7 +21,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     minWidth: 432,
     flexDirection: "column",
     backgroundColor: "#D83178",
-    borderRadius: 5,
   },
 };
 
@@ -75,6 +74,7 @@ const Widget = () => {
           onEndPress={() => {
             window.close();
           }}
+          passwordHint={metadata.pwdHint}
         />
       ) : null}
     </div>
