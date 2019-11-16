@@ -1,7 +1,9 @@
+import { InterceptorMethods } from "./enums";
+
 export type Listener = (info: any) => void;
 
 export interface IInterceptorCondition {
-    method: string;
+    method: InterceptorMethods;
     fn: (...elems: any) => boolean;
 }
 

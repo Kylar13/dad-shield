@@ -1,9 +1,10 @@
 import { IInterceptor } from "./models";
+import { InterceptorMethods } from "./enums";
 
 export const interceptors: IInterceptor[] = [
     {
         condition: {
-            method: "href",
+            method: InterceptorMethods.INTERCEPTOR_HREF,
             fn: (href) => {
                 return Boolean(href.indexOf("register") >= 0 || href.indexOf("signup") >= 0);
             },
