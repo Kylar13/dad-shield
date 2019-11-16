@@ -39,7 +39,9 @@ export class Core {
                     state: "NEW_PASSWORD",
                     metadata: {
                         pwdHint: "lo que em doni la gana"
-                    }
+                    },
+                    creationTime: Date.now(),
+                    ttl: 60 * 1000,
                 }
             });
             this.history.push(interceptorId);
