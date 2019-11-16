@@ -16,7 +16,7 @@
   },
   "background": {
     "scripts": [
-      "js/background.js"
+      "js/extension/background.js"
     ],
     "persistent": true
   },
@@ -32,7 +32,7 @@
         "http://*/*"
       ],
       "js": [
-        "js/content.js"
+        "js/extension/content.js"
       ],
       "run_at": "document_end"
     }
