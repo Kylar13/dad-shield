@@ -13,12 +13,6 @@
     "default_title": "NetMate",
     "default_popup": "widget.html"
   },
-  "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": true
-  },
   "permissions": [
     "https://*/*",
     "http://*/*"
