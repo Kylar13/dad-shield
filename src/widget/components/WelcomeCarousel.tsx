@@ -12,7 +12,7 @@ interface Props {
   onEndPress: () => void;
 }
 
-export const Carousel = (props: Props) => {
+export const WelcomeCarousel = (props: Props) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isPressed, setIsPressed] = React.useState(false);
 

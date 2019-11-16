@@ -1,8 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Carousel } from "./components/Carousel";
+import { WelcomeCarousel } from "./components/WelcomeCarousel";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
+
+enum WidgetStates {
+  WELCOME = "WELCOME",
+  NEW_PASSWORD = "NEW_PASSWORD",
+  MENU = "MENU",
+  DAILY_CHALLENGE = "DAILY_CHALLENGE",
+  QUIZ_RESULT = "QUIZ_RESULT",
+}
 
 const styles: { [key: string]: React.CSSProperties } = {
   content: {
@@ -52,7 +60,7 @@ const Widget = () => {
   return (
     <div style={styles.content}>
       {state === "WELCOME" ? (
-        <Carousel
+        <WelcomeCarousel
           style={{ display: "flex", flex: 1 }}
           items={test}
           onEndPress={() => {
