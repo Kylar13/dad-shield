@@ -35,17 +35,17 @@ interface IModalProps {
   children: React.ReactNode,
   width: number | string,
   height: number | string,
+  visible: boolean,
+  setVisibility: Function,
 }
 
 export const Modal = (props: IModalProps) => {
   
-  const [visible, setVisibility] = React.useState(true);
-
   return (
-    <div style={{...styles.overlay, display: visible ? "flex": "none"}}>
+    <div style={{...styles.overlay, display: props.visible ? "flex": "none"}}>
       <div style={{...styles.container, width: props.width, height: props.height}}>
         {props.children}
-        <div style={styles.closeButton} onClick={() => setVisibility(false)}>X</div>
+        <div style={styles.closeButton} onClick={() => props.setVisibility(false)}>X</div>
       </div>
     </div>
   );
