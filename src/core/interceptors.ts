@@ -3,6 +3,7 @@ import { InterceptorMethods } from "./enums";
 
 export const interceptors: IInterceptor[] = [
     {
+        id: "registerurl",
         condition: {
             method: InterceptorMethods.INTERCEPTOR_HREF,
             fn: (href) => {
@@ -15,6 +16,7 @@ export const interceptors: IInterceptor[] = [
         }
     },
     {
+        id: "passwordfield",
         condition: {
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (target) => {

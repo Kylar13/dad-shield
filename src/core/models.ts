@@ -13,6 +13,7 @@ export interface IInterceptorAction {
 }
 
 export interface IInterceptor {
+    id: string;
     condition: IInterceptorCondition;
     action: IInterceptorAction;
 }

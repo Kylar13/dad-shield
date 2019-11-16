@@ -1,10 +1,11 @@
-import { Listener, IInterceptor } from "./models";
+import { Listener, IInterceptor, IInterceptorAction } from "./models";
 import { interceptors } from "./interceptors";
 import { InterceptorMethods } from "./enums";
 
 export class Core {
     private fn: Listener = () => { };
     private lastHref: string;
+    private history: string[] = [];
 
     constructor() {
         // bindings
@@ -21,8 +22,19 @@ export class Core {
         this.fn = fn;
     }
 
+    private cleanHistory() {
+        this.history = [];
+    }
+
+    private pushAction(interceptorId: string, action: IInterceptorAction) {
+        this.history.push(interceptorId);
+        this.fn(action);
+    }
+
     private startHrefInterceptors() {
-        setInterval(() => { this.intercept(InterceptorMethods.INTERCEPTOR_HREF) }, 100);
+        setInterval(() => {
+            this.intercept(InterceptorMethods.INTERCEPTOR_HREF);
+        }, 100);
     }
 
     private startXPathInterceptors() {
@@ -38,6 +50,7 @@ export class Core {
         observer.observe(document, {
             subtree: true,
             attributes: true,
+            childList: true,
         });
 
         window.addEventListener("load", () => {
