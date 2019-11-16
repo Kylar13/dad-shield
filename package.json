@@ -11,12 +11,16 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "@types/chrome": "0.0.75",
+    "@types/node": "^12.12.8",
     "@types/react": "^16.7.8",
     "@types/react-dom": "^16.0.11",
     "css-loader": "^1.0.1",
+    "file-loader": "^4.2.0",
     "style-loader": "^0.23.1",
+    "svg-inline-loader": "^0.8.0",
     "ts-loader": "^5.3.1",
     "typescript": "^3.1.6",
+    "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.1.2"
   },
