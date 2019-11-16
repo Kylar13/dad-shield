@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-import "../styles/popup.css"
+import "./popup.css"
 
 class Hello extends React.Component {
     render() {
