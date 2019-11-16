@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { WelcomeCarousel } from "./components/WelcomeCarousel";
+import { PasswordHint } from "./components/PasswordHint";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
 enum WidgetStates {
@@ -43,14 +44,14 @@ const test = [
 ];
 
 const Widget = () => {
-  const [state, setState] = React.useState("WELCOME");
+  const [state, setState] = React.useState(WidgetStates.WELCOME);
   const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
     console.log("Use effect hook");
     chrome.storage.sync.get(["widgetData"], function(result) {
       if (result.widgetData) {
-        const { state = "WELCOME", metadata = {} } = result.widgetData;
+        const { state = WidgetStates.WELCOME, metadata = {} } = result.widgetData;
         setState(state);
         setMetadata(metadata);
       }
@@ -59,7 +60,7 @@ const Widget = () => {
 
   return (
     <div style={styles.content}>
-      {state === "WELCOME" ? (
+      {state === WidgetStates.WELCOME ? (
         <WelcomeCarousel
           style={{ display: "flex", flex: 1 }}
           items={test}
@@ -68,10 +69,13 @@ const Widget = () => {
           }}
         />
       ) : null}
-      {state === "NEW_PASSWORD" ? (
-        <div style={{ display: "flex", flex: 1 }}>
-          <h1>{metadata.pwdHint}</h1>
-        </div>
+      {state === WidgetStates.NEW_PASSWORD ? (
+        <PasswordHint
+          style={{ display: "flex", flex: 1 }}
+          onEndPress={() => {
+            window.close();
+          }}
+        />
       ) : null}
     </div>
   );

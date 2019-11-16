@@ -63,12 +63,14 @@ export const WelcomeCarousel = (props: Props) => {
         }}
         onClick={() => {
           setIsPressed(true);
-          setTimeout(() => setIsPressed(false), 150);
-          if (currentIndex === props.items.length - 1) {
-            props.onEndPress();
-          } else {
-            setCurrentIndex(currentIndex + 1);
-          }
+          setTimeout(() => {
+            setIsPressed(false);
+            if (currentIndex === props.items.length - 1) {
+              props.onEndPress();
+            } else {
+              setCurrentIndex(currentIndex + 1);
+            }
+          }, 150);
         }}
       >
         Next
