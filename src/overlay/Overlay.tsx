@@ -3,7 +3,7 @@ import { Modal } from "./components/Modal";
 import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
 
-export const Overlay = (props) => {
+export const Overlay = () => {
 
   let core;
 
