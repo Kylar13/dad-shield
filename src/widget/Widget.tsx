@@ -39,20 +39,15 @@ const Widget = () => {
   const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
-    try {
-      console.log("Use effect hook");
-      chrome.storage.sync.get(["widgetData"], function(result) {
-        console.log("Value currently is " + result.widgetData);
-        if (result.widgetData) {
-          const { state = "WELCOME", metadata = {} } = result.widgetData;
-          setState(state);
-          setState(metadata);
-        }
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  });
+    console.log("Use effect hook");
+    chrome.storage.sync.get(["widgetData"], function(result) {
+      if (result.widgetData) {
+        const { state = "WELCOME", metadata = {} } = result.widgetData;
+        setState(state);
+        setMetadata(metadata);
+      }
+    });
+  }, []);
 
   return (
     <div style={styles.content}>
@@ -67,7 +62,7 @@ const Widget = () => {
       ) : null}
       {state === "NEW_PASSWORD" ? (
         <div style={{ display: "flex", flex: 1 }}>
-          <p>{metadata.pwdHint}</p>
+          <h1>{metadata.pwdHint}</h1>
         </div>
       ) : null}
     </div>
