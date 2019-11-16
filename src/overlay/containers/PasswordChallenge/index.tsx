@@ -15,7 +15,7 @@ export interface IPasswordOutput {
 
 export const PasswordChallenge = (props: IProps) => {
 
-  const [output, setOutput] = React.useState<IPasswordOutput>({story: "", password: "pandatreeball!"});
+  const [output, setOutput] = React.useState<IPasswordOutput>({ story: "", password: "pandatreeball!" });
 
   const url = "https://s3.eu-central-1.amazonaws.com/static.goin/junction/TitlePassword.svg";
 
@@ -24,7 +24,9 @@ export const PasswordChallenge = (props: IProps) => {
       widgetData: {
         state: "NEW_PASSWORD",
         metadata: {
-          pwdHint: output.story
+          pwdHint: output.story,
+          creationTime: Date.now(),
+          ttl: 60 * 1000,
         }
       }
     });
@@ -33,8 +35,8 @@ export const PasswordChallenge = (props: IProps) => {
 
   return (
     <ChallengeContainer headerImageUrl={url} onFinish={onFinish}>
-      <PasswordModalIntro buttonText="Let's go!"/>
-      <PasswordModalForm buttonText="Next" output={output} setOutput={setOutput}/>
+      <PasswordModalIntro buttonText="Let's go!" />
+      <PasswordModalForm buttonText="Next" output={output} setOutput={setOutput} />
       <PasswordModalConfirm buttonText="Confirm" output={output} />
     </ChallengeContainer>
   )
