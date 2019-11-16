@@ -11,7 +11,6 @@ chrome.runtime.sendMessage({}, (response) => {
     })
 })
 
-
 const element = document.createElement('div');
 element.id = "extroot";
 
