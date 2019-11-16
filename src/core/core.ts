@@ -1,7 +1,8 @@
-import { Listener } from "./models";
+import { Listener, IInterceptor } from "./models";
+import { interceptors } from "./interceptors";
 
 export class Core {
-    private fn: Listener = (info: any) => { };
+    private fn: Listener = () => { };
     private lastHref: string;
 
     constructor() {
@@ -24,12 +25,11 @@ export class Core {
     }
 
     private onHrefChanged(href: string) {
-        console.log(href);
-        if (href.indexOf("register") >= 0 || href.indexOf("signup") >= 0) {
-            this.fn({
-                type: "question",
-                asd: "this is a signup page"
-            });
+        const hrefInterceptors = interceptors.filter((x: IInterceptor) => x.condition.method === "href");
+        for (const interceptor of hrefInterceptors) {
+            if (interceptor.condition.fn(href)) {
+                this.fn(interceptor.action);
+            }
         }
     }
 }

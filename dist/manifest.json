@@ -20,13 +20,15 @@
     "persistent": true
   },
   "permissions": [
-    "https://*/*"
+    "https://*/*",
+    "http://*/*"
   ],
   "content_security_policy": "default-src 'self';",
   "content_scripts": [
     {
       "matches": [
-        "https://*/*"
+        "https://*/*",
+        "http://*/*"
       ],
       "js": [
         "js/content.js"

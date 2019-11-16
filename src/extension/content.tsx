@@ -1,7 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { Overlay } from "../overlay/Overlay";
-import { Core } from "../core/core";
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
@@ -12,11 +11,6 @@ chrome.runtime.sendMessage({}, (response) => {
     })
 })
 
-const core = new Core();
-core.registerListener((info: any) => {
-    console.log(info);
-});
-core.start();
 
 const element = document.createElement('div');
 element.id = "extroot";
