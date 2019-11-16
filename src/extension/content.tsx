@@ -12,10 +12,9 @@ chrome.runtime.sendMessage({}, (response) => {
 })
 
 
-
 const element = document.createElement('div');
 element.id = "extroot";
 
 document.body.appendChild(element);
 
-ReactDOM.render(<Overlay/>, document.getElementById("extroot"));
+ReactDOM.render(<Overlay />, document.getElementById("extroot"));
