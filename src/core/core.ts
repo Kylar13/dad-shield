@@ -24,6 +24,7 @@ export class Core {
     }
 
     private onHrefChanged(href: string) {
+        console.log(href);
         if (href.indexOf("register") >= 0 || href.indexOf("signup") >= 0) {
             this.fn({
                 type: "question",

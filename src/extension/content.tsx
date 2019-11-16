@@ -13,10 +13,10 @@ chrome.runtime.sendMessage({}, (response) => {
 })
 
 const core = new Core();
-core.start();
 core.registerListener((info: any) => {
-    console.log("content.tsx", info);
+    console.log(info);
 });
+core.start();
 
 const element = document.createElement('div');
 element.id = "extroot";
