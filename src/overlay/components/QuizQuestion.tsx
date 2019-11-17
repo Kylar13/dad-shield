@@ -68,7 +68,7 @@ export const QuizQuestion = (props: IModalProps) => {
   } else {
     return (
       <QuizQuestionSelectedContainer onClick={props.onSelect} correct={props.correct}>
-        <div style={{ width: 60, alignItems: "center", display: "flex", background: "#8048BE", paddingLeft: 28, height: 64, borderTopLeftRadius: "6px", borderBottomLeftRadius: "6px" }}>
+        <div style={{ width: 60, alignItems: "center", display: "flex", background: "#8048BE", paddingLeft: 28, height: 64, borderTopLeftRadius: "6px", borderBottomLeftRadius: "6px", backgroundColor: props.correct ? "green": "red" }}>
           <QuestionNumber>{props.number}</QuestionNumber>
         </div>
         <div style={{ flex: 1, display: "flex", paddingLeft: 16 }} >
