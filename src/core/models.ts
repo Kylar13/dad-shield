@@ -1,4 +1,4 @@
-import { InterceptorMethods } from "./enums";
+import { InterceptorMethods, ChallengeMethods } from "./enums";
 
 export type Listener = (info: any) => void;
 
@@ -8,9 +8,7 @@ export interface IInterceptorCondition {
 }
 
 export interface IInterceptorAction {
-    question: string;
-    answer: string;
-    challenge: string;
+    method: ChallengeMethods;
 }
 
 export interface IInterceptor {

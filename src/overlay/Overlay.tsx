@@ -3,6 +3,7 @@ import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
 import { PasswordChallenge } from "./containers/PasswordChallenge/index";
 import { ChatChallenge } from "./containers/ChatChallenge/index";
+import { ChallengeMethods } from "../core/enums";
 
 export const Overlay = () => {
 
@@ -23,12 +24,11 @@ export const Overlay = () => {
     setChallenge(null);
   }
 
-  if (!!challenge && challenge.challenge === "password") {
-    return (
-      <PasswordChallenge onFinish={onFinish}/>
-    )
-  } else if (!!challenge && challenge.challenge === "chat"){
-    return <ChatChallenge onFinish={onFinish}/>;
+  if (!!challenge) {
+    if (challenge.method === ChallengeMethods.PASSWORD) return (<PasswordChallenge onFinish={onFinish} />);
+    // TODO: we should update this with Honorios Code
+    if (challenge.method === ChallengeMethods.CHAT) return (<PasswordChallenge onFinish={onFinish} />);
+    return (<div></div>)
   } else {
     return null;
   }

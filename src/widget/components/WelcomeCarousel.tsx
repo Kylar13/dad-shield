@@ -12,7 +12,7 @@ interface Props {
   onEndPress: () => void;
 }
 
-export const Carousel = (props: Props) => {
+export const WelcomeCarousel = (props: Props) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isPressed, setIsPressed] = React.useState(false);
 
@@ -39,10 +39,8 @@ export const Carousel = (props: Props) => {
         style={{
           display: "flex",
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
         }}
-      ></div>
+      />
       <p style={{ color: "white", fontFamily: "Rubik", fontSize: 16, marginBottom: isPressed ? 36 : 32 }}>
         {props.items[currentIndex].text}
       </p>
@@ -63,12 +61,14 @@ export const Carousel = (props: Props) => {
         }}
         onClick={() => {
           setIsPressed(true);
-          setTimeout(() => setIsPressed(false), 150);
-          if (currentIndex === props.items.length - 1) {
-            props.onEndPress();
-          } else {
-            setCurrentIndex(currentIndex + 1);
-          }
+          setTimeout(() => {
+            setIsPressed(false);
+            if (currentIndex === props.items.length - 1) {
+              props.onEndPress();
+            } else {
+              setCurrentIndex(currentIndex + 1);
+            }
+          }, 150);
         }}
       >
         Next

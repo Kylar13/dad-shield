@@ -36,9 +36,9 @@ export const PasswordChallenge = (props: IProps) => {
 
   return (
     <ChallengeContainer headerImageUrl={url} onFinish={onFinish} buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled}>
-      <PasswordModalIntro buttonText="Let's go!"/>
-      <PasswordModalForm buttonText="Next" output={output} setOutput={setOutput} setButtonDisabled={setButtonDisabled}/>
-      <PasswordModalConfirm buttonText="Confirm" output={output} setButtonDisabled={setButtonDisabled}/>
+      <PasswordModalIntro buttonText="Let's go!" />
+      <PasswordModalForm buttonText="Next" output={output} setOutput={setOutput} setButtonDisabled={setButtonDisabled} />
+      <PasswordModalConfirm buttonText="Confirm" output={output} setButtonDisabled={setButtonDisabled} />
     </ChallengeContainer>
   )
 };
