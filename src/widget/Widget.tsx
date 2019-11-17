@@ -72,17 +72,7 @@ const Widget = () => {
           items={test}
           onEndPress={() => {
             chrome.storage.sync.set({ hasUsedExtension: { hasUsedExtension: true } }, () => {
-              chrome.storage.sync.set(
-                {
-                  dailyChallenge: {
-                    question: "Do you need to log out when you are done using a platform?",
-                    options: ["🎉 Yes", "😭 No"],
-                  },
-                },
-                () => {
-                  setState(WidgetStates.DAILY_CHALLENGE);
-                },
-              );
+              setState(WidgetStates.DAILY_CHALLENGE);
             });
           }}
         />
