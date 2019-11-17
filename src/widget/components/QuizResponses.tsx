@@ -13,7 +13,6 @@ export const QuizResponses = (props: Props) => {
   const [isPressed, setIsPressed] = React.useState(false);
   const { responses = [] } = props;
 
-  console.log(responses);
   return (
     <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
       <Header style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }} img={QuizHeader} />
