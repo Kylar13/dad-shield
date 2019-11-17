@@ -21,16 +21,6 @@ export const ChatChallenge = (props: IProps) => {
   const url = "https://s3.eu-central-1.amazonaws.com/static.goin/junction/TitleTalk.svg";
 
   const onFinish = () => {
-    chrome.storage.sync.set({
-      // widgetData: {
-      //   state: "NEW_PASSWORD",
-      //   metadata: {
-      //     pwdHint: output.story,
-      //     creationTime: Date.now(),
-      //     ttl: 60 * 1000,
-      //   }
-      // }
-    });
     props.onFinish(output);
   }
 
