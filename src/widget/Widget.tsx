@@ -50,12 +50,12 @@ const Widget = () => {
   const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
-    chrome.storage.sync.get(["widgetData"], function(result) {
+    chrome.storage.sync.get(["widgetData"], function (result) {
       if (result.widgetData) {
-        const { state = "WELCOME", metadata = {}, ttl = 60, creationTime = null } = result.widgetData;
+        const { state = WidgetStates.WELCOME, metadata = {} } = result.widgetData;
         setState(state);
         setMetadata(metadata);
-        if (creationTime && creationTime + ttl < Date.now()) {
+        if (metadata.creationTime + metadata.ttl < Date.now()) {
           chrome.storage.sync.set({ widgetData: {} });
           setState(WidgetStates.WELCOME);
           setMetadata({});
