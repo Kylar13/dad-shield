@@ -7,10 +7,15 @@ interface IProps {
   buttonText: string;
   output: IChatOutput;
   setOutput: (output: IChatOutput) => void;
+  setButtonDisabled: (disabled: boolean) => void;
 }
 
 
 export const ChatModalQuiz2 = (props: IProps) => {
+
+  React.useEffect(() => {
+    props.setButtonDisabled(true);
+  }, []);
 
   const [selectedA, setA] = React.useState<boolean>(false);
   const [selectedB, setB] = React.useState<boolean>(false);
@@ -20,15 +25,18 @@ export const ChatModalQuiz2 = (props: IProps) => {
     setA(true);
     setB(false);
     setC(false);
+    props.setButtonDisabled(true);
   };
 
   const onClickB = () => {
+    props.setButtonDisabled(false);
     setA(false);
     setB(true);
     setC(false);
   };
 
   const onClickC = () => {
+    props.setButtonDisabled(true);
     setA(false);
     setB(false);
     setC(true);
@@ -42,7 +50,7 @@ export const ChatModalQuiz2 = (props: IProps) => {
       </div>
       <div style={{ flex: 1, padding: 19 }}>
         <QuizQuestion number={"A)"} answer={"My friends."} isSelected={selectedA} onSelect={onClickA}/>
-        <QuizQuestion number={"B)"} answer={"No one, maybe my parents."} isSelected={selectedB} onSelect={onClickB}/>
+        <QuizQuestion number={"B)"} answer={"No one, maybe my parents."} correct isSelected={selectedB} onSelect={onClickB}/>
         <QuizQuestion number={"C)"} answer={"Strangers."} isSelected={selectedC} onSelect={onClickC}/>
       </div>
     </div>
