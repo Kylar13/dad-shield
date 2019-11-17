@@ -4,6 +4,7 @@ import { Header } from "./Header";
 export interface ICarouselItem {
   text: string;
   img: string;
+  imgBanner: string;
 }
 
 interface Props {
@@ -34,6 +35,10 @@ export const WelcomeCarousel = (props: Props) => {
           />
         ))}
       </div>
+      <Header
+        style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }}
+        img={props.items[currentIndex].imgBanner}
+      />
       <Header style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }} img={props.items[currentIndex].img} />
       <div
         style={{

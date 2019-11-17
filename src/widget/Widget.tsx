@@ -6,7 +6,7 @@ import { PasswordHint } from "./components/PasswordHint";
 import { Menu } from "./components/Menu";
 import { QuizResponses } from "./components/QuizResponses";
 import { DailyChallenge } from "./components/DailyChallenge";
-import { WelcomeBanner, CharacterWaving } from "../assets/index";
+import { WelcomeBanner, CharacterWaving, Zombies, ZombiesBanner } from "../assets/index";
 
 import { fetchFromDb } from "../utils/fetchDB";
 
@@ -31,18 +31,16 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const test = [
   {
-    text: "This is Teddy your NetMate, he will help you protect your things from the Zombies while using the Internet.",
-    img: WelcomeBanner,
-  },
-  {
     text:
-      "These are The Zombies, they will try to get advantage of you. They are all the strangers around the Internet.",
+      "This is Teddy, your NetMate. He will help you protect your things from the Zombies while using the Internet.",
+    imgBanner: WelcomeBanner,
     img: CharacterWaving,
   },
   {
     text:
-      "3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    img: WelcomeBanner,
+      "These are The Zombies, they will try to get advantage of you. They are all the strangers around the Internet.",
+    imgBanner: ZombiesBanner,
+    img: Zombies,
   },
 ];
 
