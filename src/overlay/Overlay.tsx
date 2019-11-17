@@ -26,8 +26,7 @@ export const Overlay = () => {
 
   if (!!challenge) {
     if (challenge.method === ChallengeMethods.PASSWORD) return (<PasswordChallenge onFinish={onFinish} />);
-    // TODO: we should update this with Honorios Code
-    if (challenge.method === ChallengeMethods.CHAT) return (<PasswordChallenge onFinish={onFinish} />);
+    if (challenge.method === ChallengeMethods.CHAT) return (<ChatChallenge onFinish={onFinish} />);
     return (<div></div>)
   } else {
     return null;
