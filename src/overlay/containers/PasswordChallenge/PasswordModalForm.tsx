@@ -30,7 +30,7 @@ export const PasswordModalForm = (props: IProps) => {
   const onBlur = () => {
     const values = nlp(props.output.story).nouns().out("array") as string[];
     console.log(values);
-    props.setOutput({...props.output, password: values.join("") + values.length +"!"});
+    props.setOutput({...props.output, password: values.map(v => v.charAt(0).toUpperCase() + v.slice(1)).join("").replace(" ", "") + values.length +"!"});
   };
 
   return (
