@@ -41,7 +41,9 @@ export const WelcomeCarousel = (props: Props) => {
           flex: 1,
         }}
       />
-      <div></div>
+      <p style={{ color: "white", fontFamily: "Rubik", fontSize: 16, marginBottom: isPressed ? 36 : 32 }}>
+        {props.items[currentIndex].text}
+      </p>
       <button
         style={{
           display: "flex",
