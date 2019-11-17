@@ -23,7 +23,7 @@ export const interceptors: IInterceptor[] = [
             method: InterceptorMethods.INTERCEPTOR_XPATH,
             fn: (target) => {
                 const search = document.evaluate("//input[@type=\"password\"]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                return Boolean(search);
+                return Boolean(search === document.activeElement);
             },
         },
         action: {
