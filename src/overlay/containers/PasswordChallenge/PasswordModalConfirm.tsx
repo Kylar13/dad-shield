@@ -29,12 +29,12 @@ export const PasswordModalConfirm = (props: IProps) => {
   return (
     <div>
       <div style={{flex: 1, padding: 19, fontSize: 20, fontFamily: "Rubik"}}>
-        Amazing! The password you just created is super effective! The Zombies are running away!
+        Amazing!💪 The password you just created is super effective, the nouns you wrote in your story and the number of nouns! The Zombies are running away! 🧟‍♂️💨
       </div>
       <div style={{flex: 1, margin: 19, display: "flex", flexDirection: "column"}}>
         <InputTitle>Password:</InputTitle>
         <PasswordHighlight>{props.output.password}</PasswordHighlight>
-        <InputTitle>"Try writing your new password:"</InputTitle>
+        <InputTitle>Try writing your new password:</InputTitle>
         <Input placeholder="Write your new password again here." value={password} onChange={onChange}/>
       </div>
     </div>
