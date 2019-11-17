@@ -6,12 +6,21 @@ import { QuizHeader } from "../../assets/index";
 interface Props {
   style?: React.CSSProperties;
   onEndPress: () => void;
-  responses: string[];
+  onBackPress: () => void;
 }
 
 export const QuizResponses = (props: Props) => {
   const [isPressed, setIsPressed] = React.useState(false);
-  const { responses = [] } = props;
+  const [responses, setResponses] = React.useState([]);
+
+  React.useEffect(() => {
+    chrome.storage.sync.get(["quizResponses"], async (result) => {
+      if (!result.quizResponses.responses) {
+        return;
+      }
+      setResponses(result.quizResponses.responses);
+    });
+  }, [])
 
   return (
     <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>

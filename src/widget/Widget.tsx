@@ -35,7 +35,8 @@ const test = [
     img: WelcomeBanner,
   },
   {
-    text: "These are The Zombies, they will try to get advantage of you. They are all the strangers around the Internet.",
+    text:
+      "These are The Zombies, they will try to get advantage of you. They are all the strangers around the Internet.",
     img: CharacterWaving,
   },
   {
@@ -50,7 +51,7 @@ const Widget = () => {
 
   React.useEffect(() => {
     chrome.storage.sync.get(["hasUsedExtension"], async (result) => {
-      if (result.hasUsedExtension) {
+      if (result.hasUsedExtension.hasUsedExtension) {
         const widgetData = await fetchFromDb("widgetData");
         if (!widgetData) {
           return;
@@ -97,13 +98,16 @@ const Widget = () => {
       {state === WidgetStates.MENU ? (
         <Menu
           style={{ display: "flex", flex: 1 }}
-          onDailyChallengePress={() => {
+          onDailyChallengePressed={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.DAILY_CHALLENGE } });
             setState(WidgetStates.DAILY_CHALLENGE);
           }}
           onPasswordHintPressed={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.NEW_PASSWORD } });
             setState(WidgetStates.NEW_PASSWORD);
           }}
-          onQuizResultsPress={() => {
+          onQuizResultsPressed={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.QUIZ_RESULT } });
             setState(WidgetStates.QUIZ_RESULT);
           }}
         />
@@ -111,7 +115,12 @@ const Widget = () => {
       {state === WidgetStates.QUIZ_RESULT ? (
         <QuizResponses
           style={{ display: "flex", flex: 1 }}
+          onBackPress={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.MENU } });
+            setState(WidgetStates.MENU);
+          }}
           onEndPress={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.MENU } });
             window.close();
           }}
         />
@@ -120,6 +129,7 @@ const Widget = () => {
         <DailyChallenge
           style={{ display: "flex", flex: 1 }}
           onBackPress={() => {
+            chrome.storage.sync.set({ widgetData: { state: WidgetStates.MENU } });
             setState(WidgetStates.MENU);
           }}
         />

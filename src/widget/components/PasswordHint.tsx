@@ -15,11 +15,11 @@ export const PasswordHint = (props: Props) => {
 
   React.useEffect(() => {
     chrome.storage.sync.get(["passwordHint"], async (result) => {
-      if (!result.hint) {
+      if (!result.passwordHint.hint) {
         setPasswordHint("No password set");
         return;
       }
-      setPasswordHint(result.hint);
+      setPasswordHint(result.passwordHint.hint);
     });
   }, []);
 

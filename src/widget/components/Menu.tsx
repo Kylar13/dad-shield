@@ -6,7 +6,7 @@ interface Props {
   style?: React.CSSProperties;
   onDailyChallengePressed: () => void;
   onPasswordHintPressed: () => void;
-  onQuizResultsPress: () => void;
+  onQuizResultsPressed: () => void;
 }
 
 export const Menu = (props: Props) => {
@@ -73,7 +73,7 @@ export const Menu = (props: Props) => {
           border: "none",
           outline: "none",
         }}
-        onClick={props.onQuizResultsPress}
+        onClick={props.onQuizResultsPressed}
       >
         Let's talk
       </button>
