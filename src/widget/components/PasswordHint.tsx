@@ -5,12 +5,23 @@ import { PasswordHeader, Lock } from "../../assets";
 
 interface Props {
   style?: React.CSSProperties;
-  passwordHint: string;
+  onBackPressed: () => void;
 }
 
 export const PasswordHint = (props: Props) => {
   const [isPressed, setIsPressed] = React.useState(false);
+  const [passwordHint, setPasswordHint] = React.useState("No password set");
   const [passwordVisible, setPasswordVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    chrome.storage.sync.get(["passwordHint"], async (result) => {
+      if (!result.hint) {
+        setPasswordHint("No password set");
+        return;
+      }
+      setPasswordHint(result.hint);
+    });
+  }, []);
 
   return (
     <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
@@ -38,7 +49,7 @@ export const PasswordHint = (props: Props) => {
         }}
       >
         {passwordVisible ? (
-          <p style={{ fontFamily: "Rubik", fontSize: 24, color: "white" }}>{props.passwordHint}</p>
+          <p style={{ fontFamily: "Rubik", fontSize: 24, color: "white" }}>{passwordHint}</p>
         ) : (
           <img src={Lock} />
         )}

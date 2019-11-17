@@ -8,6 +8,8 @@ import { QuizResponses } from "./components/QuizResponses";
 import { DailyChallenge } from "./components/DailyChallenge";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
+import { fetchFromDb } from "../utils/fetchDB";
+
 enum WidgetStates {
   WELCOME = "WELCOME",
   NEW_PASSWORD = "NEW_PASSWORD",
@@ -47,24 +49,18 @@ const test = [
 
 const Widget = () => {
   const [state, setState] = React.useState(WidgetStates.WELCOME);
-  const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
-    chrome.storage.sync.get(["hasUsedExtension"], (result) => {
-      console.log(result);
+    chrome.storage.sync.get(["hasUsedExtension"], async (result) => {
       if (result.hasUsedExtension) {
-        chrome.storage.sync.get(["widgetData"], function(result) {
-          if (result.widgetData) {
-            const { state = WidgetStates.MENU, metadata = {} } = result.widgetData;
-            setState(state);
-            setMetadata(metadata);
-            if (metadata.creationTime + metadata.ttl < Date.now()) {
-              chrome.storage.sync.set({ widgetData: {} });
-              setState(WidgetStates.MENU);
-              setMetadata({});
-            }
-          }
-        });
+        const widgetData = await fetchFromDb("widgetData");
+        if (!widgetData) {
+          return;
+        }
+        const { state = WidgetStates.MENU } = widgetData;
+        setState(state);
+      } else {
+        setState(WidgetStates.WELCOME);
       }
     });
   }, []);
@@ -77,33 +73,57 @@ const Widget = () => {
           items={test}
           onEndPress={() => {
             chrome.storage.sync.set({ hasUsedExtension: { hasUsedExtension: true } }, () => {
-              setState(WidgetStates.MENU);
-              setMetadata({});
+              chrome.storage.sync.set(
+                {
+                  dailyChallenge: {
+                    question: "Do you need to log out when you are done using a platform?",
+                    options: ["🎉 Yes", "😭 No"],
+                  },
+                },
+                () => {
+                  setState(WidgetStates.DAILY_CHALLENGE);
+                },
+              );
             });
           }}
         />
       ) : null}
       {state === WidgetStates.NEW_PASSWORD ? (
-        <PasswordHint style={{ display: "flex", flex: 1 }} passwordHint={metadata.pwdHint} />
+        <PasswordHint
+          style={{ display: "flex", flex: 1 }}
+          onBackPressed={() => {
+            setState(WidgetStates.MENU);
+          }}
+        />
       ) : null}
-      {state === WidgetStates.MENU ? <Menu style={{ display: "flex", flex: 1 }} /> : null}
+      {state === WidgetStates.MENU ? (
+        <Menu
+          style={{ display: "flex", flex: 1 }}
+          onDailyChallengePress={() => {
+            setState(WidgetStates.DAILY_CHALLENGE);
+          }}
+          onPasswordHintPressed={() => {
+            setState(WidgetStates.NEW_PASSWORD);
+          }}
+          onQuizResultsPress={() => {
+            setState(WidgetStates.QUIZ_RESULT);
+          }}
+        />
+      ) : null}
       {state === WidgetStates.QUIZ_RESULT ? (
         <QuizResponses
           style={{ display: "flex", flex: 1 }}
           onEndPress={() => {
             window.close();
           }}
-          responses={metadata.responses}
         />
       ) : null}
       {state === WidgetStates.DAILY_CHALLENGE ? (
         <DailyChallenge
           style={{ display: "flex", flex: 1 }}
-          onEndPress={() => {
-            window.close();
+          onBackPress={() => {
+            setState(WidgetStates.MENU);
           }}
-          question={metadata.question}
-          options={metadata.options}
         />
       ) : null}
     </div>

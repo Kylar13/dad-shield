@@ -13,8 +13,18 @@ interface Props {
 export const DailyChallenge = (props: Props) => {
   const [hasClicked, setHasClicked] = React.useState(false);
   const [selectedQuestions, setSelectedQuestions] = React.useState([false, false]);
+  const [question, setQuestion] = React.useState("Do you like the app?");
+  const [options, setOptions] = React.useState(["🎉 Yes", "😭 No"]);
 
-  const { question, options = ["🎉 Yes", "😭 No"] } = props;
+  React.useEffect(() => {
+    chrome.storage.sync.get(["dailyChallenge"], async (result) => {
+      if (!result.question) {
+        return;
+      }
+      setQuestion(result.question);
+      setOptions(result.options);
+    });
+  }, []);
 
   return (
     <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>

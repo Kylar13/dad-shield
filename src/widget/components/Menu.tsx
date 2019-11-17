@@ -4,6 +4,9 @@ import { Header } from "./Header";
 
 interface Props {
   style?: React.CSSProperties;
+  onDailyChallengePressed: () => void;
+  onPasswordHintPressed: () => void;
+  onQuizResultsPress: () => void;
 }
 
 export const Menu = (props: Props) => {
@@ -17,6 +20,63 @@ export const Menu = (props: Props) => {
           alignItems: "center",
         }}
       ></div>
+      <button
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "blue",
+          height: 80,
+          marginBottom: 24,
+          borderRadius: 5,
+          fontFamily: "Rubik",
+          fontSize: 24,
+          color: "white",
+          boxShadow: "0px 4px 0px #140374",
+          border: "none",
+          outline: "none",
+        }}
+        onClick={props.onDailyChallengePressed}
+      >
+        Daily Challenge
+      </button>
+      <button
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "blue",
+          height: 80,
+          marginBottom: 24,
+          borderRadius: 5,
+          fontFamily: "Rubik",
+          fontSize: 24,
+          color: "white",
+          boxShadow: "0px 4px 0px #140374",
+          border: "none",
+          outline: "none",
+        }}
+        onClick={props.onPasswordHintPressed}
+      >
+        Protect your candy
+      </button>
+      <button
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "blue",
+          height: 80,
+          marginBottom: 24,
+          borderRadius: 5,
+          fontFamily: "Rubik",
+          fontSize: 24,
+          color: "white",
+          boxShadow: "0px 4px 0px #140374",
+          border: "none",
+          outline: "none",
+        }}
+        onClick={props.onQuizResultsPress}
+      >
+        Let's talk
+      </button>
     </div>
   );
 };
