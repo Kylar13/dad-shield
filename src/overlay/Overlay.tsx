@@ -2,6 +2,7 @@ import * as React from "react";
 import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
 import { PasswordChallenge } from "./containers/PasswordChallenge/index";
+import { ChatChallenge } from "./containers/ChatChallenge/index";
 
 export const Overlay = () => {
 
@@ -22,10 +23,12 @@ export const Overlay = () => {
     setChallenge(null);
   }
 
-  if (!!challenge) {
+  if (!!challenge && challenge.challenge === "password") {
     return (
       <PasswordChallenge onFinish={onFinish}/>
     )
+  } else if (!!challenge && challenge.challenge === "chat"){
+    return <ChatChallenge onFinish={onFinish}/>;
   } else {
     return null;
   }

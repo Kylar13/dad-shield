@@ -45,7 +45,7 @@ export const ChallengeContainer = (props: IProps) => {
           {Stage}
         </ChallengeContent>
         <div style={{maxWidth: 600, margin: "auto"}}>
-          <Button onClick={onClick}>
+          <Button onClick={onClick} >
             {Stage.props.buttonText}
           </Button>
         </div>

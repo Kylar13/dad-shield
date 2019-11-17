@@ -10,6 +10,7 @@ export interface IInterceptorCondition {
 export interface IInterceptorAction {
     question: string;
     answer: string;
+    challenge: string;
 }
 
 export interface IInterceptor {

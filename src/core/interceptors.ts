@@ -14,6 +14,7 @@ export const interceptors: IInterceptor[] = [
         action: {
             question: "INTERCEPTOR_HREF",
             answer: "asdasd",
+            challenge: "chat"
         }
     },
     {
@@ -29,6 +30,8 @@ export const interceptors: IInterceptor[] = [
         action: {
             question: "INTERCEPTOR_XPATH",
             answer: "password",
+            challenge: "chat"
+
         }
     },
     {
@@ -44,6 +47,8 @@ export const interceptors: IInterceptor[] = [
         action: {
             question: "INTERCEPTOR_XPATH",
             answer: "facebook chat",
+            challenge: "chat"
+
         }
     }
 ];
