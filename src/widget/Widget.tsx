@@ -5,6 +5,7 @@ import { WelcomeCarousel } from "./components/WelcomeCarousel";
 import { PasswordHint } from "./components/PasswordHint";
 import { Menu } from "./components/Menu";
 import { QuizResponses } from "./components/QuizResponses";
+import { DailyChallenge } from "./components/DailyChallenge";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
 enum WidgetStates {
@@ -49,14 +50,16 @@ const Widget = () => {
   const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
-    console.log("Use effect hook");
     chrome.storage.sync.get(["widgetData"], function(result) {
       if (result.widgetData) {
         const { state = WidgetStates.WELCOME, metadata = {} } = result.widgetData;
         // setState(state);
         // setMetadata(metadata);
-        setState(WidgetStates.QUIZ_RESULT);
-        setMetadata({ responses: ["Hola Gerard hue huehuehue huhue hue h huehue hue", "Fuck you"] });
+        setState(WidgetStates.DAILY_CHALLENGE);
+        setMetadata({
+          question: "This is a test question not intended for the public to see? more lines",
+          options: ["Fuck", "Yikes"],
+        });
       }
     });
   }, []);
@@ -83,6 +86,16 @@ const Widget = () => {
             window.close();
           }}
           responses={metadata.responses}
+        />
+      ) : null}
+      {state === WidgetStates.DAILY_CHALLENGE ? (
+        <DailyChallenge
+          style={{ display: "flex", flex: 1 }}
+          onEndPress={() => {
+            window.close();
+          }}
+          question={metadata.question}
+          options={metadata.options}
         />
       ) : null}
     </div>

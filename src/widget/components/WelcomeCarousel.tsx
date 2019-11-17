@@ -39,10 +39,8 @@ export const WelcomeCarousel = (props: Props) => {
         style={{
           display: "flex",
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
         }}
-      ></div>
+      />
       <div></div>
       <button
         style={{
