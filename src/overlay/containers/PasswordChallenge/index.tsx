@@ -22,14 +22,9 @@ export const PasswordChallenge = (props: IProps) => {
 
   const onFinish = () => {
     chrome.storage.sync.set({
-      widgetData: {
-        state: "NEW_PASSWORD",
-        metadata: {
-          pwdHint: output.story,
-          creationTime: Date.now(),
-          ttl: 60 * 1000,
-        }
-      }
+      passwordHint: {
+        hint: output.story,
+      },
     });
     props.onFinish(output);
   }
