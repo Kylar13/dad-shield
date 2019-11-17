@@ -6,7 +6,6 @@ module.exports = {
 
   entry: {
     "extension/content": "./src/extension/content.tsx",
-    "extension/background": "./src/extension/background.ts",
     "widget/widget": "./src/widget/Widget.tsx",
   },
 

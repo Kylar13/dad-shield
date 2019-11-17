@@ -2,6 +2,7 @@ import * as React from "react";
 import { Core } from "../core/core";
 import { IInterceptorAction } from "../core/models";
 import { PasswordChallenge } from "./containers/PasswordChallenge/index";
+import { ChatChallenge } from "./containers/ChatChallenge/index";
 import { ChallengeMethods } from "../core/enums";
 
 export const Overlay = () => {
