@@ -6,7 +6,6 @@ import { PasswordHeader, Lock } from "../../assets";
 interface Props {
   style?: React.CSSProperties;
   passwordHint: string;
-  onEndPress: () => void;
 }
 
 export const PasswordHint = (props: Props) => {

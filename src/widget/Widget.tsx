@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom";
 import { WelcomeCarousel } from "./components/WelcomeCarousel";
 import { PasswordHint } from "./components/PasswordHint";
 import { Menu } from "./components/Menu";
+import { QuizResponses } from "./components/QuizResponses";
 import { WelcomeBanner, CharacterWaving } from "../assets/index";
 
 enum WidgetStates {
@@ -52,8 +53,10 @@ const Widget = () => {
     chrome.storage.sync.get(["widgetData"], function(result) {
       if (result.widgetData) {
         const { state = WidgetStates.WELCOME, metadata = {} } = result.widgetData;
-        setState(state);
-        setMetadata(metadata);
+        // setState(state);
+        // setMetadata(metadata);
+        setState(WidgetStates.QUIZ_RESULT);
+        setMetadata({ responses: ["Hola Gerard hue huehuehue huhue hue h huehue hue", "Fuck you"] });
       }
     });
   }, []);
@@ -70,22 +73,18 @@ const Widget = () => {
         />
       ) : null}
       {state === WidgetStates.NEW_PASSWORD ? (
-        <PasswordHint
-          style={{ display: "flex", flex: 1 }}
-          onEndPress={() => {
-            chrome.storage.sync.set(
-              {
-                widgetData: {
-                  state: WidgetStates.MENU,
-                },
-              },
-              window.close,
-            );
-          }}
-          passwordHint={metadata.pwdHint}
-        />
+        <PasswordHint style={{ display: "flex", flex: 1 }} passwordHint={metadata.pwdHint} />
       ) : null}
       {state === WidgetStates.MENU ? <Menu style={{ display: "flex", flex: 1 }} /> : null}
+      {state === WidgetStates.QUIZ_RESULT ? (
+        <QuizResponses
+          style={{ display: "flex", flex: 1 }}
+          onEndPress={() => {
+            window.close();
+          }}
+          responses={metadata.responses}
+        />
+      ) : null}
     </div>
   );
 };
