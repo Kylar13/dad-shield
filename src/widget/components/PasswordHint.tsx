@@ -24,8 +24,21 @@ export const PasswordHint = (props: Props) => {
   }, []);
 
   return (
-    <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
-      <Header style={{ display: "flex", paddingTop: 60, paddingBottom: 20 }} img={PasswordHeader} />
+    <div style={{ ...props.style, flexDirection: "column" }}>
+      <button
+        style={{
+          display: "flex",
+          border: "none",
+          outline: "none",
+          marginLeft: 16,
+          paddingTop: 16,
+          fontSize: 16,
+          fontFamily: "Rubik",
+          backgroundColor: "transparent",
+        }}
+        onClick={props.onBackPressed}
+      >{`<  Back to Menu`}</button>
+      <Header style={{ display: "flex", paddingTop: 20, paddingBottom: 20 }} img={PasswordHeader} />
       <div
         style={{
           display: "flex",
@@ -34,7 +47,16 @@ export const PasswordHint = (props: Props) => {
           alignItems: "center",
         }}
       ></div>
-      <p style={{ marginBottom: 32, fontFamily: "Rubik", fontSize: 16, color: "white" }}>
+      <p
+        style={{
+          marginBottom: 32,
+          fontFamily: "Rubik",
+          fontSize: 16,
+          color: "white",
+          marginLeft: 56,
+          marginRight: 56,
+        }}
+      >
         Remember to show it to no one, and change them often!
       </p>
       <div
@@ -46,6 +68,8 @@ export const PasswordHint = (props: Props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          marginLeft: 56,
+          marginRight: 56,
         }}
       >
         {passwordVisible ? (
@@ -68,6 +92,8 @@ export const PasswordHint = (props: Props) => {
           boxShadow: isPressed ? "0px 0px 0px #9E9E9E" : "0px 4px 0px #140374",
           border: "none",
           outline: "none",
+          marginLeft: 56,
+          marginRight: 56,
         }}
         onMouseDown={() => {
           setIsPressed(true);

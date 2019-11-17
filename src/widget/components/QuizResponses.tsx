@@ -11,7 +11,10 @@ interface Props {
 
 export const QuizResponses = (props: Props) => {
   const [isPressed, setIsPressed] = React.useState(false);
-  const [responses, setResponses] = React.useState([]);
+  const [responses, setResponses] = React.useState([
+    "Tell your parents if someone you don’t know ask you to do something.",
+    "Do not share your strong password with anyone that is not from your family.",
+  ]);
 
   React.useEffect(() => {
     chrome.storage.sync.get(["quizResponses"], async (result) => {
@@ -20,11 +23,27 @@ export const QuizResponses = (props: Props) => {
       }
       setResponses(result.quizResponses.responses);
     });
-  }, [])
+  }, []);
 
   return (
-    <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
-      <Header style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }} img={QuizHeader} />
+    <div style={{ ...props.style, flexDirection: "column" }}>
+      <button
+        style={{
+          display: "flex",
+          border: "none",
+          outline: "none",
+          marginLeft: 16,
+          paddingTop: 16,
+          fontSize: 16,
+          fontFamily: "Rubik",
+          backgroundColor: "transparent",
+        }}
+        onClick={props.onBackPress}
+      >{`<  Back to Menu`}</button>
+      <Header
+        style={{ display: "flex", paddingTop: 60, paddignBottom: 20, marginLeft: 56, marginRight: 56 }}
+        img={QuizHeader}
+      />
       <div
         style={{
           display: "flex",
@@ -38,6 +57,8 @@ export const QuizResponses = (props: Props) => {
           alignItems: "center",
           flexDirection: "column",
           paddingBottom: 52,
+          marginLeft: 56,
+          marginRight: 56,
         }}
       >
         {responses.map((response: string) => (
@@ -83,6 +104,8 @@ export const QuizResponses = (props: Props) => {
           boxShadow: isPressed ? "0px 0px 0px #9E9E9E" : "0px 4px 0px #140374",
           border: "none",
           outline: "none",
+          marginLeft: 56,
+          marginRight: 56,
         }}
         onClick={() => {
           setIsPressed(true);

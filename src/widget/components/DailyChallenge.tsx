@@ -5,15 +5,13 @@ import { DailyChallengeHeader } from "../../assets/index";
 
 interface Props {
   style?: React.CSSProperties;
-  onEndPress: () => void;
-  question: string;
-  options: string[];
+  onBackPress: () => void;
 }
 
 export const DailyChallenge = (props: Props) => {
   const [hasClicked, setHasClicked] = React.useState(false);
   const [selectedQuestions, setSelectedQuestions] = React.useState([false, false]);
-  const [question, setQuestion] = React.useState("Do you like the app?");
+  const [question, setQuestion] = React.useState("Do you need to log out when you are done using a platform?");
   const [options, setOptions] = React.useState(["🎉 Yes", "😭 No"]);
 
   React.useEffect(() => {
@@ -27,8 +25,24 @@ export const DailyChallenge = (props: Props) => {
   }, []);
 
   return (
-    <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
-      <Header style={{ display: "flex", paddingTop: 60, paddignBottom: 20 }} img={DailyChallengeHeader} />
+    <div style={{ ...props.style, flexDirection: "column" }}>
+      <button
+        style={{
+          display: "flex",
+          border: "none",
+          outline: "none",
+          marginLeft: 16,
+          paddingTop: 16,
+          fontSize: 16,
+          fontFamily: "Rubik",
+          backgroundColor: "transparent",
+        }}
+        onClick={props.onBackPress}
+      >{`<  Back to Menu`}</button>
+      <Header
+        style={{ display: "flex", paddingTop: 60, paddignBottom: 20, marginLeft: 56, marginRight: 56 }}
+        img={DailyChallengeHeader}
+      />
       <div
         style={{
           display: "flex",
@@ -36,6 +50,8 @@ export const DailyChallenge = (props: Props) => {
           alignItems: "center",
           flexDirection: "column",
           paddingTop: 72,
+          marginLeft: 56,
+          marginRight: 56,
         }}
       >
         <p style={{ fontFamily: "Rubik", fontSize: 24, color: "white" }}>{question}</p>
@@ -52,6 +68,8 @@ export const DailyChallenge = (props: Props) => {
           justifyContent: "space-between",
           height: 48,
           marginBottom: 52,
+          marginLeft: 56,
+          marginRight: 56,
         }}
       >
         <div style={{ display: "flex", flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -70,6 +88,9 @@ export const DailyChallenge = (props: Props) => {
               outline: "none",
             }}
             onClick={() => {
+              if (hasClicked) {
+                return;
+              }
               setHasClicked(true);
               setSelectedQuestions([true, false]);
             }}
@@ -93,8 +114,11 @@ export const DailyChallenge = (props: Props) => {
               outline: "none",
             }}
             onClick={() => {
+              if (hasClicked) {
+                return;
+              }
               setHasClicked(true);
-              setSelectedQuestions([false, true]);
+              setSelectedQuestions([true, false]);
             }}
           >
             {options[1]}

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Header } from "./Header";
+import { MenuHeader } from "../../assets/index";
 
 interface Props {
   style?: React.CSSProperties;
@@ -12,6 +13,7 @@ interface Props {
 export const Menu = (props: Props) => {
   return (
     <div style={{ ...props.style, flexDirection: "column", paddingLeft: 56, paddingRight: 56 }}>
+      <Header style={{ display: "flex", paddingTop: 60, paddingBottom: 20 }} img={MenuHeader} />
       <div
         style={{
           display: "flex",
