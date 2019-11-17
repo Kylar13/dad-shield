@@ -31,13 +31,11 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const test = [
   {
-    text:
-      "1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    text: "This is Teddy your NetMate, he will help you protect your things from the Zombies while using the Internet.",
     img: WelcomeBanner,
   },
   {
-    text:
-      "2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    text: "These are The Zombies, they will try to get advantage of you. They are all the strangers around the Internet.",
     img: CharacterWaving,
   },
   {

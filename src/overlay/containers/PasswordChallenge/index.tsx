@@ -27,7 +27,7 @@ export const PasswordChallenge = (props: IProps) => {
         metadata: {
           pwdHint: output.story,
           creationTime: Date.now(),
-          ttl: 6 * 1000,
+          ttl: 60 * 1000,
         }
       }
     });

@@ -1,5 +1,5 @@
 import { IInterceptor } from "./models";
-import { InterceptorMethods } from "./enums";
+import { InterceptorMethods, ChallengeMethods } from "./enums";
 
 export const interceptors: IInterceptor[] = [
     {
@@ -12,8 +12,7 @@ export const interceptors: IInterceptor[] = [
             },
         },
         action: {
-            question: "INTERCEPTOR_HREF",
-            answer: "asdasd",
+            method: ChallengeMethods.PASSWORD,
         }
     },
     {
@@ -27,8 +26,7 @@ export const interceptors: IInterceptor[] = [
             },
         },
         action: {
-            question: "INTERCEPTOR_XPATH",
-            answer: "password",
+            method: ChallengeMethods.PASSWORD,
         }
     },
     {
@@ -42,8 +40,7 @@ export const interceptors: IInterceptor[] = [
             },
         },
         action: {
-            question: "INTERCEPTOR_XPATH",
-            answer: "facebook chat",
+            method: ChallengeMethods.CHAT,
         }
     }
 ];
