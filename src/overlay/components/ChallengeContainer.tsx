@@ -10,6 +10,8 @@ interface IProps {
   headerImageUrl: string;
   children: JSX.Element[];
   onFinish: () => void;
+  buttonDisabled?: boolean;
+  setButtonDisabled?: (state: boolean) => void;
 }
 
 const ChallengeContent = styled.div`
@@ -23,13 +25,20 @@ const ChallengeContent = styled.div`
 
 export const ChallengeContainer = (props: IProps) => {
 
+  const {headerImageUrl, onFinish, children, buttonDisabled = false, setButtonDisabled = () => null} = props
+
   const [stage, setStage] = React.useState(0);
 
-  const Stage = props.children[stage];
+  const Stage = children[stage];
 
   const onClick = () => {
-    if (stage === props.children.length -1) {
-      props.onFinish();
+
+    if (buttonDisabled) return;
+    
+    setButtonDisabled(false);
+
+    if (stage === children.length -1) {
+      onFinish();
     } else {
       setStage(stage + 1);
     }
@@ -39,13 +48,13 @@ export const ChallengeContainer = (props: IProps) => {
     <FullScreenModal>
       <div style={{display: "block"}}>
         <div style={{maxWidth: 800, margin: "auto"}}>
-          <HeaderImage src={props.headerImageUrl}></HeaderImage>
+          <HeaderImage src={headerImageUrl}></HeaderImage>
         </div>
         <ChallengeContent>
           {Stage}
         </ChallengeContent>
         <div style={{maxWidth: 600, margin: "auto"}}>
-          <Button onClick={onClick} >
+          <Button onClick={onClick} disabled={buttonDisabled}>
             {Stage.props.buttonText}
           </Button>
         </div>

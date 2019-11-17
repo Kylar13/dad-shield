@@ -40,11 +40,16 @@ const Widget = () => {
 
   React.useEffect(() => {
     console.log("Use effect hook");
-    chrome.storage.sync.get(["widgetData"], function(result) {
+    chrome.storage.sync.get(["widgetData"], function (result) {
       if (result.widgetData) {
-        const { state = "WELCOME", metadata = {} } = result.widgetData;
+        const { state = "WELCOME", metadata = {}, ttl = 60, creationTime = null } = result.widgetData;
         setState(state);
         setMetadata(metadata);
+        if (creationTime && creationTime + ttl < Date.now()) {
+          chrome.storage.sync.set({ widgetData: {} });
+          setState("WELCOME");
+          setMetadata({});
+        }
       }
     });
   }, []);
