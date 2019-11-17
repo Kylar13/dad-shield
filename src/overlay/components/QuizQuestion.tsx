@@ -16,7 +16,7 @@ const QuizQuestionContainer = styled.div`
 `;
 
 const conditionalStyle = props => css`
-  background-color: ${props.correct ? "green" : "red"}
+  background-color: ${props.correct ? "#00B762;" : "#FF1818"}
 `;
 
 const QuizQuestionSelectedContainer = styled.div`
@@ -68,7 +68,7 @@ export const QuizQuestion = (props: IModalProps) => {
   } else {
     return (
       <QuizQuestionSelectedContainer onClick={props.onSelect} correct={props.correct}>
-        <div style={{ width: 60, alignItems: "center", display: "flex", background: "#8048BE", paddingLeft: 28, height: 64, borderTopLeftRadius: "6px", borderBottomLeftRadius: "6px", backgroundColor: props.correct ? "green": "red" }}>
+        <div style={{ width: 60, alignItems: "center", display: "flex", background: "#8048BE", paddingLeft: 28, height: 64, borderTopLeftRadius: "6px", borderBottomLeftRadius: "6px", backgroundColor: props.correct ? "#00B762": "#FF1818" }}>
           <QuestionNumber>{props.number}</QuestionNumber>
         </div>
         <div style={{ flex: 1, display: "flex", paddingLeft: 16 }} >
