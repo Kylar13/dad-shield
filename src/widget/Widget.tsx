@@ -50,16 +50,21 @@ const Widget = () => {
   const [metadata, setMetadata] = React.useState({} as { [key: string]: any });
 
   React.useEffect(() => {
-    chrome.storage.sync.get(["widgetData"], function (result) {
-      if (result.widgetData) {
-        const { state = WidgetStates.WELCOME, metadata = {} } = result.widgetData;
-        setState(state);
-        setMetadata(metadata);
-        if (metadata.creationTime + metadata.ttl < Date.now()) {
-          chrome.storage.sync.set({ widgetData: {} });
-          setState(WidgetStates.WELCOME);
-          setMetadata({});
-        }
+    chrome.storage.sync.get(["hasUsedExtension"], (result) => {
+      console.log(result);
+      if (result.hasUsedExtension) {
+        chrome.storage.sync.get(["widgetData"], function(result) {
+          if (result.widgetData) {
+            const { state = WidgetStates.MENU, metadata = {} } = result.widgetData;
+            setState(state);
+            setMetadata(metadata);
+            if (metadata.creationTime + metadata.ttl < Date.now()) {
+              chrome.storage.sync.set({ widgetData: {} });
+              setState(WidgetStates.MENU);
+              setMetadata({});
+            }
+          }
+        });
       }
     });
   }, []);
@@ -71,7 +76,10 @@ const Widget = () => {
           style={{ display: "flex", flex: 1 }}
           items={test}
           onEndPress={() => {
-            window.close();
+            chrome.storage.sync.set({ hasUsedExtension: { hasUsedExtension: true } }, () => {
+              setState(WidgetStates.MENU);
+              setMetadata({});
+            });
           }}
         />
       ) : null}
